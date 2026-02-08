@@ -19,16 +19,16 @@ if [ $USERID -ne 0 ]; then
     exit 1    
 fi
 mkdir -p $LOGS_FOLDER
-VALIDATE()
-{
-if [ $1 -ne 0 ]; then
-    echo -e "$2 $R Failure $N" | tee -a $LOGS_FILE
-    exit 1
-else
-    echo -e "$2 $G Success $N" | tee -a $LOGS_FILE
-fi
+# VALIDATE()
+# {
+# if [ $1 -ne 0 ]; then
+#     echo -e "$2 $R Failure $N" | tee -a $LOGS_FILE
+#     exit 1
+# else
+#     echo -e "$2 $G Success $N" | tee -a $LOGS_FILE
+# fi
 
-}
+# }
 
 for package in $@
 do
@@ -36,7 +36,7 @@ dnf list installed $package &>> $LOGS_FILE
 if [ $? -ne 0 ]; then
     echo "Package not installed as of now, Instaling $package"
     dnf install $package -y &>> $LOGS_FILE
-    VALIDATE $? "Installing $package"
+   # VALIDATE $? "Installing $package"
 else 
     echo -e "$Y Package $package already Installed so skipping the installation step. $N"
 fi
